@@ -1,0 +1,39 @@
+header {
+    display: block;
+    padding: 18px;
+}
+
+.highscore {
+    display: block;
+    float: left;
+    margin: 5px;
+    position: relative;
+}
+
+.timer {
+    display: block;
+    float: right;
+    margin: 5px;
+    position: relative;
+}
+
+.question-container {
+    display: block;
+    justify-content: center;
+    align-content: center;
+    margin: 25%;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    display: block;
+    padding: 8px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background: purple;
+    width: 25%;
+    color: white;
+    border-radius: 12px;
+    top: 3px;
+}
