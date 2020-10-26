@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz!</title>
     <link rel="stylesheet" href="./assets/styles.css" />
 </head>
+
 <body>
     <header class="scoreboard">
         <div class="highscore">View High Score</div>
-        <div class="timer">Time:60</div>
+        <div class="timer" id="timer">
+            
+        </div>
     </header>
+
+    <section class="title-page">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Welcome to the Coding Quiz Challenge. Please answer the quesions to the best of your knowledge. Keep in mind
+            that if you answer a question wrong, you will be penalized. At the end, your will save your initials with
+            your score. </p>
+        <button class="btn" id="start-btn">Start Quiz</button>
+    </section>
 
     <section class="question-container">
         <div class="question-prompt">
-            <h2>Your questions will be right here.</h2><!-- This is the question prompt section -->
+            <ul class="btn" type="answer">
+
+            </ul>
         </div>
-        <div class="btn" type="answer"><!-- Option 1 --> Option 1</div>
-        <div class="btn" type="answer"><!-- Option 2 --> Option 2</div>
-        <div class="btn" type="answer"><!-- Option 3 --> Option 3</div>
-        <div class="btn" type="answer"><!-- Option 4 --> Option 4</div>
         <!-- There will be another div container added here through DOM -->
         <!--"" Correct or Wrong "-->
     </section>
 
-    <script src="/assets/script.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
+
 </html>

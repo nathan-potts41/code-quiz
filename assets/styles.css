@@ -1,3 +1,31 @@
+.btn {
+    outline: none;
+    border: none;
+    display: block;
+    padding: 8px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background: purple;
+    width: fit-content;
+    color: white;
+    border-radius: 12px;
+    top: 3px;
+} 
+
+#start-btn {
+    outline: none;
+    border: none;
+    display: inline-block;
+    padding: 8px;
+    background: purple;
+    width: fit-content;
+    color: white;
+    border-radius: 12px;
+    top: 3px;
+    align-items: center;
+
+}
+
 header {
     display: block;
     padding: 18px;
@@ -17,6 +45,12 @@ header {
     position: relative;
 }
 
+.title-page {
+    display: block;
+    text-align: center;
+    margin: 20%;
+}
+
 .question-container {
     display: block;
     justify-content: center;
@@ -24,16 +58,7 @@ header {
     margin: 25%;
 }
 
-.btn {
-    outline: none;
-    border: none;
-    display: block;
-    padding: 8px;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    background: purple;
-    width: 25%;
-    color: white;
-    border-radius: 12px;
-    top: 3px;
+.question-prompt {
+    font-size: larger;
 }
+
