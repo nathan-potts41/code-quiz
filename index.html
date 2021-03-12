@@ -17,7 +17,7 @@
     </header>
 <!-- initial HTML -->
 <!-- will need to clear this when question is generated -->
-    <section class="title-page" id="title-page">
+    <section id="title-page" class="show">
         <h1>Coding Quiz Challenge</h1>
         <p>Welcome to the Coding Quiz Challenge. Please answer the quesions to the best of your knowledge. Keep in mind
             that if you answer a question wrong, you will be penalized. At the end, your will save your initials with
@@ -26,11 +26,18 @@
     </section>
 
 <!-- container for the dynamically generated quiz -->
-    <section class="quiz" id="quiz"></section>
+    <section class="quiz display" id="quiz"></section>
 
-    <button id="submit">Submit Quiz</button>
 <!-- container for the dynamically generated results-->
-    <div id="results"></div>
+    <div id="results" class="display"></div>
+
+    <div id="scoreboard" class="diplay">
+    </div>
+    <br>
+    <br>
+    <button onclick=resetTest() class="btn display" id="rstBtn">Reset</button>
+    <br>
+    <button id="submit" class="btn display">Submit Quiz</button>
 
     <script src="./assets/script.js"></script>
 </body>

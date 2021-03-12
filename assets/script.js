@@ -1,12 +1,3 @@
-var startQuiz = document.getElementById("start-btn");
-var timerEl = document.getElementById("timer");
-var quizContainer = document.getElementById("quiz");
-var resultsContainer = document.getElementById("results");
-var submitButton = document.getElementById("submit");
-var titleContainer = document.getElementById("title-page");
-var pos = 0;
-var correct = 0;
-
 var questions = [
     {
         question: "Commonly used Data types do not include:",
@@ -60,42 +51,33 @@ var questions = [
     },
 ];
 
-//Timer function section
+var startQuiz = document.getElementById("start-btn");
+var timerEl = document.getElementById("timer");
+var quizContainer = document.getElementById("quiz");
+var resultsContainer = document.getElementById("results");
+var scoreboardContainer = document.getElementById("scoreboard");
+var submitButton = document.getElementById("submit");
+var titleContainer = document.getElementById("title-page");
+var resetButton = document.getElementById("rstBtn");
+var timeLeft = questions.length * 15;
+var timerID;
+var highScore = [];
+var finalScore;
+var initials;
+var scoreboard;
+var pos = 0;
+var correct = 0;
 
 function countdown() {
-    var timeLeft = 75;
+    timeLeft--;
+    timerEl.textContent = timeLeft;
 
-    var timeInterval = setInterval(function () {
-        if (timeLeft > 1) {
-            timerEl.textContent = timeLeft;
-            timeLeft--;
-        } else if (timeLeft === 1) {
-            timerEl.textContent = timeLeft;
-            timeLeft--;
-        } else {
-            timerEl.textContent = '';
-            clearInterval(timeInterval);
-        }
-    }, 1000);
-
-};
-
-function stopCountdown() {
-    if (pos > questions.length) {
-        timerEl.textContent = '';
-        clearInterval(timeInterval);
-        console.log(timeInterval);
-        console.log(timerEl);
-    }
-    showResults();
-};
-
-function get(x) {
-    return document.getElementById(x);
+    if (timeLeft <= 0) {
+        showResults();
+    };
 };
 
 function renderQuestion() {
-    titleContainer.innerHTML = "";
 
     currentQuestion = "Question " + (pos + 1) + " of " + questions.length;
     question = questions[pos].question;
@@ -118,10 +100,24 @@ function renderQuestion() {
 
 };
 
+function beginQuiz() {
+    titleContainer.style.display = "none";
+    resetButton.style.display = "none";
+    submitButton.style.display = "none";
+
+    timerID = setInterval(countdown, 1000);
+    
+    timerEl.textContent = timeLeft;
+
+    nextQuestion();
+};
+
 function nextQuestion() {
     if (pos > questions.length - 1) {
+        clearInterval(timerID);
+        timerEl.textContent = "";
         quizContainer.innerHTML = "";
-        stopCountdown();
+        showResults();
     } else {
         renderQuestion();
     }
@@ -141,6 +137,9 @@ function checkAnswer() {
     if (choice === questions[pos].correctAnswer) {
         //each time there is a correct answer this value increases
         correct++;
+    } else {
+        timeLeft -= 5;
+        quizContainer.innerHTML = "Incorrect!";
     }
     // changes position of which character user is on
     pos++;
@@ -149,21 +148,70 @@ function checkAnswer() {
 };
 
 function showResults() {
-    results = "You got " + correct + " of " + questions.length + " questions correct";
-    console.log(correct)
+    submitButton.style.display = "block";
+
+    finalScore = correct
+    results = "You got " + finalScore + " of " + questions.length + " questions correct";
 
     resultsContainer.innerHTML = "Test completed";
     resultsContainer.innerHTML += "<h2>" + results + "</h2>";
     // resets the variable to allow users to restart the test
     pos = 0;
     correct = 0;
-    // stops rest of renderQuestion function running when test is completed
-    return false;
 
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+
+    var FN = document.createElement("input");
+    FN.setAttribute("method", "post");
+    FN.setAttribute("type", "text");
+    FN.setAttribute("name", "initials");
+    FN.setAttribute("id", "initial")
+    FN.setAttribute("placeholder", "Initials");
+    resultsContainer.innerHTML += "<h1> Your HighScore <h1>"
+    resultsContainer.innerHTML += "<h2>" + finalScore + "</h2>";
+
+    form.appendChild(FN);
+    resultsContainer.appendChild(form);
+    // stops rest of renderQuestion function running when test is completed
+    // inputResults(finalScore);
 };
 
-startQuiz.addEventListener("click", nextQuestion);
+function addToStorage() {
+    initials = document.getElementById("initial").value;
+    highScore.push({ initials, finalScore });
+    console.log(highScore);
 
-startQuiz.addEventListener('click', countdown);
-// submitButton.addEventListener('click', showResults);
+    var scoreboard = localStorage.setItem("highScore", JSON.stringify(highScore));
+    delete finalScore;
+    delete initials;
+    viewScoreboard();
+};
 
+function resetTest() {
+    scoreboardContainer.innerHTML = "";
+
+    titleContainer.style.display = "block";
+
+    resetButton.style.display = "block";
+
+    delete timerID;
+    delete timeLeft;
+}
+
+function viewScoreboard() {
+    resultsContainer.innerHTML = '';
+    highScore = JSON.parse(localStorage.getItem("highScore"));
+    scoreboard = document.getElementById("scoreboard");
+    for(let i = 0; i < localStorage.length; i++) {
+        scoreboard.innerHTML = "<h2> Initials: " + highScore[i].initials + "</h2>";
+        scoreboard.innerHTML += "<h2> Score: " + highScore[i].finalScore + "</h2>";
+    };
+
+    resetButton.style.display = "block";
+    scoreboardContainer.appendChild(resetButton);
+};
+
+startQuiz.addEventListener("click", beginQuiz);
+
+submitButton.addEventListener("click", addToStorage);

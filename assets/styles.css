@@ -45,7 +45,13 @@ header {
     position: relative;
 }
 
-.title-page {
+.display {
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+#title-page {
     display: block;
     text-align: center;
     margin: 20%;
