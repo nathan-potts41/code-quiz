@@ -16,7 +16,7 @@ This application is timed javascript quiz! Built with HTML, CSS, and JS, a user 
 
 ### Deployed URL
 
-
+https://nathan-potts41.github.io/code-quiz/
 
 ### Preview
 
